@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} 2023 Games {% endblock %}
+
+{% block content %}
+    <h1>2023 Season Games</h1>
+    {% for msg in get_flashed_messages() %}
+  <p>{{ msg }}</p>
+{% endfor %}
+<form id="game-form" method="POST">
+    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+  
+    {% for field in form
+           if field.widget.input_type != 'hidden' %}
+  
+      <p>
+        {{ field.label }}
+        {{ field }}
+  
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      </p>
+  
+    {% endfor %}
+  
+    <button type="submit">Submit</button>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="static/app.js"></script>
+{% endblock %}
