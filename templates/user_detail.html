@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Users{% endblock %}
+
+{% block content %}
+<h1>{{user.username}}'s Page</h1>
+<h3>Favorite Player: {{user.favorite_player}}</h3>
+<h3>Posts:</h3>
+<ul>
+    {% for post in user.posts %}
+    <li><a href="/{{username}}/basketball-forum/{{post.id}}">{{post.title}}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

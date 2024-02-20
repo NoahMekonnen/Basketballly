@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %} Home Page {% endblock %}
+{% block title %} Player stat percentages{% endblock %}
 
 {% block content %}
-<a href="/{{username}}/basketball-forum">Forum</a>
-{% for msg in get_flashed_messages() %}
+    <h1>Player Stats(Percent)</h1>
+    <a href="/{{username}}/basketball-forum"></a>
+    <form action="/logout" method="POST">
+        <button>Logout</button>
+    </form>
+    {% for msg in get_flashed_messages() %}
   <p>{{ msg }}</p>
 {% endfor %}
 <form id="game-form" method="POST">
@@ -26,4 +30,6 @@
   
     <button type="submit">Submit</button>
 </form>
+<canvas></canvas>
+<script src="/static/player_stats_percentages.js"></script>
 {% endblock %}

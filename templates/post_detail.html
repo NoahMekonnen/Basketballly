@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+<p>{{post.content}}</p>
+<form action="/{{post.username}}/basketball-forum/{{post.id}}/delete-post" method="POST">
+    <button>Delete</button>
+</form>
+<div class="likeButton"></div>
+<h4 >Likes:</h4> 
+<p class="numOfLikes">{{post.likes}}</p>
+<form action="/{{username}}/basketball-forum/{{post.id}}/create-comment">
+    <button>Add Comment</button>
+</form>
+{% for msg in get_flashed_messages() %}
+  <p>{{ msg }}</p>
+{% endfor %}
+<h3>Comments:</h3>
+<ul>
+    {% for comment in post.comments %}
+    {{comment.content}} 
+    <form action="/{{username}}/basketball-forum/{{comment.post_id}}/{{comment.id}}/edit-comment">
+        <button>Edit Comment</button>
+    </form>
+    <form action="/{{username}}/basketball-forum/{{comment.post_id}}/{{comment.id}}/delete-comment" method="POST">
+        <button>Delete</button>
+    </form>
+    {% endfor %}
+</ul>
+<div class="hidden-post-id">{{post.id}}</div>
+<div class="hidden-post-username">{{post.username}}</div>
+<div class="hidden-session-username">{{session_username}}</div>
+
+<script src="/static/like.js"></script>
+<link rel="stylesheet" href="/static/like.css">
+{% endblock %}

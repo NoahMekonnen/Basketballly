@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Home Page {% endblock %}
+{% block title %} 2023 Games {% endblock %}
 
 {% block content %}
-<a href="/{{username}}/basketball-forum">Forum</a>
-{% for msg in get_flashed_messages() %}
+    <h1>Edit A Comment</h1>
+    {% for msg in get_flashed_messages() %}
   <p>{{ msg }}</p>
 {% endfor %}
-<form id="game-form" method="POST">
+<form id="post-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
     {% for field in form
@@ -26,4 +26,5 @@
   
     <button type="submit">Submit</button>
 </form>
+<canvas></canvas>
 {% endblock %}

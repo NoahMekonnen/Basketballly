@@ -1,0 +1,19 @@
+.likeButton{
+    width: 25px;
+    height: 25px;
+}
+
+.hidden-post-id{
+   display:none; 
+}
+
+.hidden-post-username{
+    display:none;
+}
+.hidden-session-username{
+    display:none;
+}
+
+.clicked{
+    color: black
+}
