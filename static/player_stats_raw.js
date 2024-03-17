@@ -1,8 +1,8 @@
 const form = $('form')
 const inputs = $('input')
 const canvas = document.querySelector('canvas')
-console.log(form[1])
-form[1].addEventListener('submit', async function (e) {
+console.log(form,"FORM")
+form.on('submit', async function (e) {
     e.preventDefault()
     const name = inputs[1].value
     const teamName = inputs[2].value
@@ -46,7 +46,7 @@ form[1].addEventListener('submit', async function (e) {
 
             // let avg_points = total_points/player_games.length
             const total_rebounds = offRebounds+defRebounds
-            const xValues = ["Free Throws", "Three Point",
+            const xValues = ["Free Throws Made vs. Attempted", "Three Point Made vs. Attempted",
             "Assists-Turnovers", "Offensive vs total Rebounds"]
             const yValues1 = [free_throw_made, three_point_made, assists, offRebounds]
             const yValues2 = [three_point_attempted, three_point_attempted, turnovers, total_rebounds]
@@ -75,7 +75,8 @@ form[1].addEventListener('submit', async function (e) {
                     plugins: { 
                         title: { 
                             display: true, 
-                            text: 'Stacked Bar chart for pollution status' 
+                            text: 'Stacked Bar chart for pollution status',
+                            color: 'black'
                         }, 
                     },
                     scales: {
@@ -94,7 +95,7 @@ form[1].addEventListener('submit', async function (e) {
                     legend: { display: false },
                     title: {
                         display: true,
-                        text: "Scores"
+                        text: `${player.firstname} ${player.lastname} Stats`
                     }
                 }
             });

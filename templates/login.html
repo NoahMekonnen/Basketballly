@@ -4,17 +4,17 @@
 
 {% block content %}
 {% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
+  <p class="msg btn btn-danger">{{ msg }}</p>
 {% endfor %}
-<form id="login-form" method="POST">
+<form id="login-form" id="login-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
     {% for field in form
            if field.widget.input_type != 'hidden' %}
   
       <p>
-        {{ field.label }}
-        {{ field }}
+        {{ field.label(class="form-label") }}
+        {{ field(class="form-control") }}
   
         {% for error in field.errors %}
           {{ error }}
@@ -23,6 +23,6 @@
   
     {% endfor %}
   
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-success">Submit</button>
 </form>
 {% endblock %}

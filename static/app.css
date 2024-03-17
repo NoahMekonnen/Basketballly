@@ -1,4 +1,267 @@
-.container{
-    width:150px;
-    height:150px;
+.container {
+    width: 150px;
+    height: 150px;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    background-image: url(https://www.ncaa.org/images/2023/3/30/MBB-WBB_BallHoop.JPG);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: rgb(142, 90, 173);
+    height: 60px;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+nav a {
+    color: white;
+}
+
+
+h1 {
+    color: white;
+}
+
+h3 {
+    color: darkmagenta
+}
+
+h4 {
+    color: blueviolet;
+}
+
+p {
+    color: white;
+}
+
+.template-form {
+    position: absolute;
+    left: 50%;
+    width: 25%;
+    transform: translate(-40%, 250%);
+}
+
+.stat-form{
+    position: absolute;
+    left: 50%;
+    width: 25%;
+    transform: translate(-40%, 0%);
+}
+
+#login-form{
+    position: absolute;
+    left: 50%;
+    width: 25%;
+    transform: translate(-40%, 150%);
+}
+
+#register-title{
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-30%,0%);
+}
+
+#register-form{
+    position: absolute;
+    left: 50%;
+    width: 25%;
+    transform: translate(-40%, 60%);
+}
+
+#comment-title {
+    color: #1B1464;
+    position: absolute;
+    top: 30%;
+    left: 54%;
+    transform: translate(-59%, -20%);
+}
+
+#make-a-post {
+    position: relative;
+    left: 50%;
+    transform: translate(-5%, 230%);
+}
+
+#post-form {
+    position: relative;
+    width: 25%;
+    left: 50%;
+    transform: translate(-40%, 90%);
+}
+
+.choice-form {
+    position: relative;
+    width: 100%;
+}
+
+#logout-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-210%, -300%);
+}
+
+#game-score-logout-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-260%, -300%);
+}
+
+#add-post-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    transform: translate(-10%, 400%);
+}
+
+#game-scores-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    transform: translate(-40%, 80%);
+}
+
+
+#post-delete-btn {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(15%, 232%);
+}
+
+#post {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-70%, 60%);
+}
+
+#add-comment-btn {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-60%, -170%);
+}
+
+.numOfLikes {
+    font-size: 25px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(55%, -163%);
+}
+
+#likes-title {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(20%, -70%);
+}
+
+.likeButton {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-5%, 10%);
+}
+
+#comments-title {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-80%, -200%);
+}
+
+.comment-div {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, 34%);
+    height: 250px;
+    width: 350px;
+    overflow-y: auto;
+}
+
+#comment-list {
+    position: relative;
+    width: 400px;
+    height: 50px;
+    transform: translate(35%, 30%);
+}
+
+#comment-content{
+    width:500px;
+}
+
+.comment-delete-btn {
+    position: relative;
+    transform: translate(15%, -100%);
+}
+
+.register-title {
+    color: #1B1464;
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+#forum-title {
+    color: #1B1464;
+    position: relative;
+    top: 30%;
+    left: 57%;
+    transform: translate(-15%, 200%);
+}
+
+.forum-link {
+    color: white;
+    position: absolute;
+    left: 40%;
+    transform: translate(0%, 1025%);
+}
+
+#post-list {
+    position: relative;
+    top: 30%;
+    left: 57%;
+    transform: translate(-12%, 640%);
+}
+
+#post-content {
+    color: #4e0b0d;
+}
+
+
+#post-title {
+    color: #6F1E51;
+}
+
+ul {
+    list-style-type: none;
+    height: 23px;
+}
+
+.msg {
+    position: relative;
+    top: 30%;
+    left: 57%;
+    transform: translate(-68%, 200%);
 }

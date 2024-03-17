@@ -27,6 +27,10 @@ def homepage():
         return render_template('home.html')
     return redirect(f"/{session['username']}/basketball-info")
 
+@app.route('/<username>')
+def redirect_page(username):
+    return redirect('/')
+
 @app.route('/<username>/basketball-info',methods=["GET","POST"])
 def show_basketball_stuff(username):
     """ Landing page for login """
@@ -51,7 +55,7 @@ def show_basketball_stuff(username):
     flash("You must be logged in")
     return redirect('/login')
 
-@app.route('/<username>/basketball-info/Game_Scores')
+@app.route('/<username>/basketball-info/Game_Scores', methods=["GET","POST"])
 def show_games_stats(username):
     """ Page to check """
     if 'username' in session:
@@ -374,3 +378,20 @@ def get_like_state(username,post_id):
     else:
         print("HIII4")
         return jsonify({"clicked":"false"})
+
+@app.route('/login-state')
+def change_login_status():
+    if 'username' in session:
+        return jsonify({"logged-in":"true"})
+    return jsonify({"logged-in":"false"})
+
+@app.route('/<username>/logout')
+def logout_page(username):
+    if 'username' in session:
+        return render_template('logout.html')
+    flash('You must be logged in to logout')
+    return redirect('/login')
+
+@app.route('/username')
+def get_username():
+    return jsonify({"username":session['username']})

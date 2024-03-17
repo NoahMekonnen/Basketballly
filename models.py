@@ -15,7 +15,7 @@ class User(db.Model):
 
     favorite_player = db.Column(db.Text)
 
-    posts = db.relationship('Post', cascade = "all, delete", backref = 'user')
+    posts = db.relationship('Post', cascade = "all, delete", passive_deletes=True, backref = 'user')
 
 class Post(db.Model):
 
@@ -31,7 +31,7 @@ class Post(db.Model):
 
     likes = db.Column(db.Integer, nullable = False, default=0)
 
-    comments = db.relationship('Comment', cascade = "all, delete", backref = 'post')
+    comments = db.relationship('Comment', cascade = "all, delete", passive_deletes=True, backref = 'post')
 
 
 class Comment(db.Model):

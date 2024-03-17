@@ -3,19 +3,21 @@
 {% block title %} Home Page {% endblock %}
 
 {% block content %}
-<a href="/{{username}}/basketball-forum">Forum</a>
+
+<a href="/{{username}}/basketball-forum" class="forum-link">Forum</a>
 {% for msg in get_flashed_messages() %}
   <p>{{ msg }}</p>
 {% endfor %}
-<form id="game-form" method="POST">
+<div class="choice-form">
+  <form class="template-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
     {% for field in form
            if field.widget.input_type != 'hidden' %}
   
       <p>
-        {{ field.label }}
-        {{ field }}
+        {{ field.label(class="form-label") }}
+        {{ field(class="form-control") }}
   
         {% for error in field.errors %}
           {{ error }}
@@ -24,6 +26,8 @@
   
     {% endfor %}
   
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
+
 {% endblock %}

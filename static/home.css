@@ -1,0 +1,13 @@
+nav{
+    display: flex;
+    align-items: center;
+    gap:20px;
+    background-color: rgb(142, 90, 173);
+    height: 60px;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+nav a{
+    color: white;
+}

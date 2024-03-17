@@ -1,8 +1,8 @@
 const form = $('form')
 const inputs = $('input')
 const canvas = document.querySelector('canvas')
-console.log(form)
-form[1].addEventListener('submit', async function (e) {
+console.log(form,"FORM")
+form.on('submit', async function (e) {
     e.preventDefault()
     const name = inputs[1].value
     const teamName = inputs[2].value

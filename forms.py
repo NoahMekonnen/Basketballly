@@ -46,3 +46,5 @@ class PlayerForm(FlaskForm):
     team = StringField("Team")
 
     season = StringField("Season")
+
+
