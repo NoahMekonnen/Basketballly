@@ -8,7 +8,7 @@ import bcrypt
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///Capstone_one_basketball'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://iagptsui:b0JCJsLrFruyu_EarcfGuxNdH5Bdlf6V@kala.db.elephantsql.com/iagptsui'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "Godalone1."
