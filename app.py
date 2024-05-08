@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = "Godalone1."
 # debug = DebugToolbarExtension(app)
 
 connect_db(app)
-db.drop_all()
+# db.drop_all()
 db.create_all()
 
 bcrypt = Bcrypt()
