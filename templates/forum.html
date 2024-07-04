@@ -4,9 +4,7 @@
 
 {% block content %}
 <h1 id="forum-title">Basketball Forum</h1>
-{% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
-{% endfor %}
+
 <form action="/{{username}}/basketball-forum/create-post" id="add-post-form">
     <button class="btn btn-success">Add Post</button>
 </form>

@@ -9,18 +9,16 @@
     <form action="/{{post.username}}/basketball-forum/{{post.id}}/delete-post" id="post-delete-btn" method="POST">
         <button class="btn btn-danger">Delete</button>
     </form>
-    <div class="likeButton"></div>
+    <!-- <div class="likeButton"></div>
     <h4 id="likes-title">Likes:</h4>
-    <p class="numOfLikes">{{post.likes}}</p>
+    <p class="numOfLikes">{{post.likes}}</p> -->
     <form action="/{{username}}/basketball-forum/{{post.id}}/create-comment" id="add-comment-btn">
         <button class="btn btn-success">Add Comment</button>
     </form>
 </div>
 
 
-{% for msg in get_flashed_messages() %}
-<p>{{ msg }}</p>
-{% endfor %}
+
 <div class="comment-div">
     <h3 id="comments-title">Comments:</h3>
     <ul id="comment-list">

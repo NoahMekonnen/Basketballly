@@ -1,14 +1,20 @@
 """Flask app for Cupcakes"""
-from flask import Flask, request, redirect, render_template, flash, session,jsonify
+import os 
+
+from flask import Flask, request, redirect, render_template, flash, session, jsonify, g
 from models import db, connect_db, User, Post, Comment, Player, LikeButton
 from forms import RegisterForm, LoginForm, GameForm, SelectForm, PlayerForm, PostForm, CommentForm
 # from flask_debugtoolbar import DebugToolbarExtension
 from flask_bcrypt import Bcrypt
 import bcrypt
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://iagptsui:b0JCJsLrFruyu_EarcfGuxNdH5Bdlf6V@kala.db.elephantsql.com/iagptsui'
+# iagptsui:b0JCJsLrFruyu_EarcfGuxNdH5Bdlf6V@kala.db.elephantsql.com/iagptsui
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    os.environ.get('DATABASE_URL', 'postgresql://noah:Godalone1.@localhost:5432/Capstone_one_basketball'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "Godalone1."
@@ -21,11 +27,13 @@ db.create_all()
 
 bcrypt = Bcrypt()
 
+
+
 @app.route('/')
 def homepage():
-    if 'username' not in session:
+    if 'username' in session:
         return render_template('home.html')
-    return redirect(f"/{session['username']}/basketball-info")
+    return redirect("/login")
 
 @app.route('/<username>')
 def redirect_page(username):
@@ -34,93 +42,89 @@ def redirect_page(username):
 @app.route('/<username>/basketball-info',methods=["GET","POST"])
 def show_basketball_stuff(username):
     """ Landing page for login """
-    if 'username' in session:
-        if session['username'] == username:
-            form = SelectForm()
-            if form.validate_on_submit():
-                info = form.info.data
+    if session['username'] == username:
+        form = SelectForm()
+        if form.validate_on_submit():
+            info = form.info.data
                 
-                if info == "games":
-                    return redirect(f"/{session['username']}/basketball-info/Game_Scores")
-                if info == "player_stats_raw":
-                    return redirect(f"/{session['username']}/basketball-info/player-stats-raw")
-                if info == "player_stats_percentages":
-                    return redirect(f"/{session['username']}/basketball-info/player-stats-percentages")
-            return render_template('new_home.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-info")
-
-    flash("You must be logged in")
-    return redirect('/login')
+            if info == "games":
+                return redirect(f"/{session['username']}/basketball-info/Game_Scores")
+            if info == "player_stats_raw":
+                return redirect(f"/{session['username']}/basketball-info/player-stats-raw")
+            if info == "player_stats_percentages":
+                return redirect(f"/{session['username']}/basketball-info/player-stats-percentages")
+        return render_template('new_home.html',form=form,username=username)
+    else:
+        flash("You cannot access that page. Did you mean this?", "danger")
+        return redirect(f"/{session['username']}/basketball-info")
 
 @app.route('/<username>/basketball-info/Game_Scores', methods=["GET","POST"])
 def show_games_stats(username):
     """ Page to check """
-    if 'username' in session:
-        if session['username'] == username:
-            form = GameForm()
-            return render_template('Game_Scores.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-info/Game_Scores")
+
+    if session['username'] == username:
+        form = GameForm()
+        return render_template('Game_Scores.html',form=form,username=username)
+    else:
+        flash("Did you mean this?")
+        return redirect(f"/{session['username']}/basketball-info/Game_Scores")
     
     flash("You must be logged in")
     return redirect('/login')
 
 @app.route('/<username>/basketball-info/player-stats-raw')
 def show_raw_player_stats(username):
-    if 'username' in session:
-        if session['username'] == username:
-            print(session['username'])
-            form = PlayerForm()
-            return render_template('player_stats_raw.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-info/player-stats-raw")
+
+    if session['username'] == username:
+        print("in stats raw form")
+        form = PlayerForm()
+        return render_template('player_stats_raw.html',form=form,username=username)
+    else:
+        flash("You cannot access that page")
+        flash("Did you mean this?")
+        return redirect(f"/{session['username']}/basketball-info/player-stats-raw")
     
     flash("You must be logged in")
     return redirect('/login')
 
 @app.route('/<username>/basketball-info/player-stats-percentages')
 def show_percent_player_stats(username):
-    if 'username' in session:
-        if session['username'] == username:
-            print(session['username'])
-            form = PlayerForm()
-            return render_template('player_stats_percentages.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-info/player-stats-percentages")
+
+    if session['username'] == username:
+            
+        form = PlayerForm()
+        return render_template('player_stats_percentages.html',form=form,username=username)
+    else:
+        flash("Did you mean this?")
+        return redirect(f"/{session['username']}/basketball-info/player-stats-percentages")
     
     flash("You must be logged in")
     return redirect('/login')
 
 @app.route('/<username>/basketball-info/charts')
 def bar_chart(username):
-    if 'username' in session:
-        if session['username'] == username:
-            return render_template('bar_chart.html',username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-info/charts")
+
+    if session['username'] == username:
+        return render_template('bar_chart.html',username=username)
+    else:
+        flash("Did you mean this?")
+        return redirect(f"/{session['username']}/basketball-info/charts")
 
     flash("You must be logged in")
     return redirect('/login')
 
 @app.route('/register', methods=['GET','POST'])
 def register():
+    print('very beginning register')
     form = RegisterForm()
+    print("before register submit")
     if form.validate_on_submit():
+        print("in register submit")
         username = form.username.data
         favorite_player = form.favorite_player.data
-        test_username = User.query.filter_by(username=username).first()
-        if not test_username:
+        existing_user = User.query.filter_by(username=username).first()
+        print(existing_user,"USERRRRRRRRRRRR")
+        if not existing_user:
             password = form.password.data
 
 
@@ -131,11 +135,11 @@ def register():
             db.session.add(user)
 
             db.session.commit()
-
-            session['username'] = username
+            print(user.username)
+            session['username'] = user.username
             return redirect(f"/{session['username']}/basketball-info")
         else:
-            flash("That username is already taken")
+            flash("That username is already taken", "danger")
             return render_template('register.html',form=form)
     return render_template('register.html',form=form)
 
@@ -148,18 +152,12 @@ def login():
 
         user = User.query.filter_by(username=username).first()
         if user and bcrypt.check_password_hash(user.password, password):
-            session['username'] = username
+            session['username'] = user.username
             return redirect(f"/{session['username']}/basketball-info")
 
-        flash("You need to enter proper credentials")
-        return redirect('/login')
+        flash("Invalid username/password", "danger")
+        return render_template('login.html',form=form)
     return render_template('login.html',form=form)
-
-@app.route('/logout',methods =["POST"])
-def logout():
-    session.pop('username')
-
-    return redirect('/')
 
 @app.route('/users')
 def get_users():
@@ -173,14 +171,13 @@ def get_user(username):
 
 @app.route('/<username>/basketball-forum',methods= ["GET","POST"])
 def forum(username):
-    if 'username' in session:
-        if session['username'] == username:
-            posts = Post.query.all()
-            return render_template('forum.html',posts=posts,username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-forum")
+
+    if session['username'] == username:
+        posts = Post.query.all()
+        return render_template('forum.html',posts=posts,username=username)
+    else:
+        flash("Did you mean this?")
+        return redirect(f"/{session['username']}/basketball-forum")
     flash("You must be logged in")
     return redirect('/login')
 
@@ -194,160 +191,158 @@ def post_detail(username,post_id):
             post = Post.query.get(post_id)
             return render_template('post_detail.html',post=post,session_username=session_username,username=username)
         else:
-            flash("You cannot access that page")
             flash("Did you mean this?")
             return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-    
-    flash("You must be logged in")
-    return redirect('/login')
+    else:
+        flash("You must be logged in"," danger")
+        return redirect('/login')
 
 @app.route('/<username>/basketball-forum/create-post', methods=["GET","POST"])
 def create_post(username):
-    if 'username' in session:
-        if session['username'] == username:
-            form = PostForm()
-            if form.validate_on_submit():
-                title = form.title.data
-                content = form.content.data
-                username = session['username']
 
-                post = Post(title=title,content=content,username=username)
+    if session['username'] == username:
+        form = PostForm()
+        if form.validate_on_submit():
+            title = form.title.data
+            content = form.content.data
+            username = session['username']
 
-                db.session.add(post)
-                db.session.commit()
-                return redirect(f"/{session['username']}/basketball-forum")
-            return render_template('post_form.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
-            flash("Did you mean this?")
-            return redirect(f"/{session['username']}/basketball-forum/create-post")
-    flash("You must be logged in")
+            post = Post(title=title,content=content,username=username)
+
+            db.session.add(post)
+            db.session.commit()
+            return redirect(f"/{session['username']}/basketball-forum")
+        return render_template('post_form.html',form=form,username=username)
+    else:
+        flash("Did you mean this?", "danger")
+        return redirect(f"/{session['username']}/basketball-forum/create-post")
+    flash("You must be logged in", "danger")
     return redirect('/login')
 
 @app.route('/<username>/basketball-forum/<int:post_id>/delete-post', methods=["POST"])
 def delete_post(username,post_id):
-    if 'username' in session:
-        if session['username'] == username:
-            post = Post.query.get(post_id)
-    
-            db.session.delete(post)
-            db.session.commit()
 
-            return redirect(f"/{session['username']}/basketball-forum")
-        else:
-            flash("You cannot delete that")
-            return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-    flash("You must be logged in")
+    if session['username'] == username:
+        post = Post.query.get(post_id)
+    
+        db.session.delete(post)
+        db.session.commit()
+
+        return redirect(f"/{session['username']}/basketball-forum")
+    else:
+        flash("You cannot delete that", "danger")
+        return redirect(f"/{session['username']}/basketball-forum/{post_id}")
+    flash("You must be logged in", "danger")
     return redirect('/login')
 
 @app.route('/<username>/basketball-forum/<int:post_id>/edit-post', methods =["GET","POST"])
 def patch_post(username,post_id):
-    if 'username' in session:
-        if session['username'] == username:
-            form = PostForm()
-            if form.validate_on_submit():
-                title = form.title.data
-                content = form.content.data
 
-                post.query.get(post_id)
-                post.title = title
-                post.content = content
+    if session['username'] == username:
+        form = PostForm()
+        if form.validate_on_submit():
+            title = form.title.data
+            content = form.content.data
 
-                db.session.commit()
+            post.query.get(post_id)
+            post.title = title
+            post.content = content
 
-                return redirect(f"/{session['username']}/forum") 
-            return render_template('edit_post_form.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
-            return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-    flash("You must be logged in")
+            db.session.commit()
+
+            return redirect(f"/{session['username']}/forum") 
+        return render_template('edit_post_form.html',form=form,username=username)
+    else:
+        flash("You cannot access that page", "danger")
+        return redirect(f"/{session['username']}/basketball-forum/{post_id}")
+    flash("You must be logged in", "danger")
     return redirect('/login')
 
 @app.route('/<username>/basketball-forum/<int:post_id>/create-comment', methods=["GET","POST"])
 def create_comment(username,post_id):
-    if 'username' in session:
-        if session['username'] == username:
-            form = CommentForm()
-            if form.validate_on_submit():
-                content = form.content.data
 
-                comment = Comment(content=content, post_id=post_id)
-                db.session.add(comment)
+    if session['username'] == username:
+        form = CommentForm()
+        if form.validate_on_submit():
+            content = form.content.data
 
-                db.session.commit()
+            comment = Comment(content=content, post_id=post_id)
+            db.session.add(comment)
 
-                return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-            return render_template('comment_form.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
+            db.session.commit()
+
             return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-    flash("You must be logged in")
+        return render_template('comment_form.html',form=form,username=username)
+    else:
+        flash("You cannot access that page", "danger")
+        return redirect(f"/{session['username']}/basketball-forum/{post_id}")
+    flash("You must be logged in", "danger")
     return redirect('/login')
 
 @app.route('/<username>/basketball-forum/<int:post_id>/<int:comment_id>/edit-comment', methods=["GET","POST"])
 def edit_comment(username,post_id,comment_id):
-    if 'username' in session:
-        if session['username'] == username:
-            form = CommentForm()
-            if form.validate_on_submit():
-                content = form.content.data
 
-                comment = Comment.query.get(comment_id)
-                comment.content = content
+    if session['username'] == username:
+        form = CommentForm()
+        if form.validate_on_submit():
+            content = form.content.data
 
-                db.session.commit()
-                print("BYEEE")
-                return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-            return render_template('edit_comment_form.html',form=form,username=username)
-        else:
-            flash("You cannot access that page")
+            comment = Comment.query.get(comment_id)
+            comment.content = content
+
+            db.session.commit()
+
             return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-    flash("You must be logged in")
+        return render_template('edit_comment_form.html',form=form,username=username)
+    else:
+        flash("You cannot access that page", "danger")
+        return redirect(f"/{session['username']}/basketball-forum/{post_id}")
+    flash("You must be logged in", "danger")
     return redirect('/login')
 
 @app.route('/<username>/basketball-forum/<int:post_id>/<int:comment_id>/delete-comment', methods=["POST"])
 def delete_comment(username,post_id,comment_id):
-    if 'username' in session:
-        if session['username'] == username:
-            comment = Comment.query.get(comment_id)
-    
-            db.session.delete(comment)
-            db.session.commit()
 
-            return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-        else:
-            flash("You cannot delete that")
-            return redirect(f"/{session['username']}/basketball-forum/{post_id}")
-    flash("You must be logged in")
+    if session['username'] == username:
+        comment = Comment.query.get(comment_id)
+    
+        db.session.delete(comment)
+        db.session.commit()
+
+        return redirect(f"/{session['username']}/basketball-forum/{post_id}")
+    else:
+        flash("You cannot delete that", "danger")
+        return redirect(f"/{session['username']}/basketball-forum/{post_id}")
+    flash("You must be logged in", "danger")
     return redirect('/login')
 
 @app.route('/<username>/basketball-forum/<int:post_id>/like', methods=["POST"])
 def like(username,post_id):
-    if 'username' in session:
-        post = Post.query.get(post_id)
-        post_username = username
-        like_username = session['username']
-        clicked = request.args.get('clicked')
-        check_button = LikeButton.query.filter((LikeButton.like_username==like_username) & (LikeButton.post_username==post_username) &
-        (post_id==post_id)).first()
+
+    post = Post.query.get(post_id)
+    post_username = username
+    like_username = session['username']
+    clicked = request.args.get('clicked')
+    check_button = LikeButton.query.filter((LikeButton.like_username==like_username) & (LikeButton.post_username==post_username) &
+    (post_id==post_id)).first()
 
     
-        if check_button == None:
-            like_button = LikeButton(like_username=like_username,post_username=post_username,post_id=post_id,clicked=True)
-            db.session.add(like_button)
+    if check_button == None:
+        like_button = LikeButton(like_username=like_username,post_username=post_username,post_id=post_id,clicked=True)
+        db.session.add(like_button)
+
+        db.session.commit()
+            
+    else:
+        if clicked == 'false':
+                
+            check_button.clicked = False
 
             db.session.commit()
-            print(like_button.clicked,"CLICKED CHECKER!!!!")
         else:
-            if clicked == 'false':
-                print(check_button.clicked,"CLICKED CHECKER!!!!")
-                check_button.clicked = False
+            check_button.clicked = True
 
-                db.session.commit()
-            else:
-                check_button.clicked = True
-
-                db.session.commit()
+            db.session.commit()
 
         if clicked == 'true':
             post.likes += 1
@@ -364,32 +359,34 @@ def get_like_state(username,post_id):
     like_username = session['username']
     like_button = LikeButton.query.filter((LikeButton.like_username==like_username) & (LikeButton.post_username==post_username) &
     (post_id==post_id)).first()
-    print("BYEEE")
+   
     if like_button == None:
-        print("HIIII3")
+        
         return {"clicked":"false"}
     elif like_button:
         if like_button.clicked == True:
-            print("HIIII1")
+           
             return jsonify({"clicked":"true"})
         else:
-            print("HIII2")
+            
             return jsonify({"clicked":"false"})
     else:
-        print("HIII4")
+        
         return jsonify({"clicked":"false"})
 
 @app.route('/login-state')
 def change_login_status():
     if 'username' in session:
-        return jsonify({"logged-in":"true"})
-    return jsonify({"logged-in":"false"})
+        return jsonify({"logged-in":True})
+    return jsonify({"logged-in":False})
 
-@app.route('/<username>/logout')
-def logout_page(username):
+@app.route('/logout')
+def logout_page():
     if 'username' in session:
-        return render_template('logout.html')
-    flash('You must be logged in to logout')
+        session.pop('username')
+        flash("You have successfully logged out", "success")
+    else:
+        flash('You must be logged in to do that', "danger")
     return redirect('/login')
 
 @app.route('/username')

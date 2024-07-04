@@ -5,9 +5,6 @@
 {% block content %}
 
     <h1 id="comment-title">Make A Comment</h1>
-    {% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
-{% endfor %}
 <form class="template-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   

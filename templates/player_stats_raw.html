@@ -5,10 +5,8 @@
 {% block content %}
     <h1>Player Stats(Raw)</h1>
     <a href="/{{username}}/basketball-forum"></a>
-    {% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
-{% endfor %}
-<form class="stat-form" method="POST">
+    
+<form class="stat-form" id="raw">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
     {% for field in form
@@ -27,6 +25,9 @@
   
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<canvas></canvas>
+<canvas id="canvas">
+
+</canvas>
 <script src="/static/player_stats_raw.js"></script>
+
 {% endblock %}

@@ -5,9 +5,7 @@
 {% block content %}
 
 <a href="/{{username}}/basketball-forum" class="forum-link">Forum</a>
-{% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
-{% endfor %}
+
 <div class="choice-form">
   <form class="template-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->

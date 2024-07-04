@@ -3,7 +3,19 @@
 {% block title %} Home Page {% endblock %}
 
 {% block content %}
-<h1>Welcome</h1>
-<link rel="stylesheet" href="/static/home.css">
+<div class="Home-Content">
+    <h1 class="Home-Welcome">Welcome</h1>
+    <div class="Home-Buttons">
+        <form action="/login">
+            <button class="Home-Button">
+                Login
+            </button>
+        </form>
+        <form>
+            <button class="Home-Button">
+                Sign Up
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}
-

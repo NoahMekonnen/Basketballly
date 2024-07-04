@@ -6,10 +6,8 @@
 <link rel="stylesheet" href="/static/Game_Scores.css">
     <h1>Games Scores</h1>
     <a href="/{{username}}/basketball-forum"></a>
-    {% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
-{% endfor %}
-<form id="game-scores-form" method="POST">
+    
+<form id="game-scores-form">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
     {% for field in form
@@ -28,6 +26,9 @@
   
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<canvas></canvas>
+<canvas>
+
+</canvas>
+
 <script src="/static/season_game_stats.js"></script>
 {% endblock %}

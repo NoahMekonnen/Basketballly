@@ -4,9 +4,7 @@
 
 {% block content %}
     <h1 id="make-a-post">Make A Post</h1>
-    {% for msg in get_flashed_messages() %}
-  <p>{{ msg }}</p>
-{% endfor %}
+  
 <form id="post-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   

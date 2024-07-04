@@ -1,7 +1,4 @@
-.container {
-    width: 150px;
-    height: 150px;
-}
+
 
 html {
     min-height: 100%;
@@ -13,35 +10,80 @@ body {
     background-size: cover;
 }
 
-nav {
+/* Navbar styling*/
+
+nav{
+    background-color: #e84118;
+    height: 70px;
+}
+
+nav ul {
     display: flex;
     align-items: center;
-    gap: 20px;
-    background-color: rgb(142, 90, 173);
-    height: 60px;
     vertical-align: middle;
     font-size: 18px;
+    text-align: center;
+    height: 100%;
 }
 
-nav a {
+nav li{
+    height: 100%;
+}
+
+li{
+    display: flex;
+    align-items: center;
+    /* padding: 20px; */
+    /* margin: 20px; */
+}
+
+li a {
     color: white;
+    display: block;
+    /* margin: 0px; */
+    text-decoration: none;
+    font-weight: 600;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
 }
 
+li:hover {
+    text-decoration: none;
+    /* color:#E64833 */
+    background-color: #0097e6;
+}
+/*Home Page- Not logged in*/
 
-h1 {
-    color: white;
+.Home-Content{
+    position: relative;
+    height: 60vh;
+    top: 15%;
 }
 
-h3 {
-    color: darkmagenta
+.Home-Welcome{
+    margin: 0 auto;
+    width: 150px;
+    color: #c0392b;
+    position: relative;
+    /* right: 5%; */
 }
 
-h4 {
-    color: blueviolet;
+.Home-Buttons{
+    margin: 0 auto;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    top:40%;
 }
 
-p {
-    color: white;
+.Home-Button{
+    border-radius: 4px;
+    background-color: #1abc9c;
+    border: 1px solid #bdc3c7;
+    height: 40px;
 }
 
 .template-form {
@@ -58,25 +100,54 @@ p {
     transform: translate(-40%, 0%);
 }
 
-#login-form{
-    position: absolute;
-    left: 50%;
-    width: 25%;
-    transform: translate(-40%, 150%);
-}
+/*Register/Login Form */
 
 #register-title{
-    position: absolute;
-    left: 50%;
-    top: 20%;
-    transform: translate(-30%,0%);
+    color: #40739e;
+    margin: 0 auto;
+    width: 160px;
+}
+
+.register-form-container{
+    margin: 0 auto;
+    transform: translate(0%, 20%);
+    background-color: #40739e;
+    width: 400px;
+    height: 360px;
+    border-radius: 4px;
 }
 
 #register-form{
-    position: absolute;
-    left: 50%;
-    width: 25%;
-    transform: translate(-40%, 60%);
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    top: 8%;
+}
+
+#login-title{
+    color: #40739e;
+    margin: 0 auto;
+    width: 120px;
+}
+
+.login-form-container{
+    margin: 0 auto;
+    transform: translate(0%, 20%);
+    background-color: #40739e;
+    width: 400px;
+    height: 260px;
+    border-radius: 4px;
+}
+
+#login-form{
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    top: 8%;
+}
+
+.form-label{
+    color: #44bd32;
 }
 
 #comment-title {
@@ -87,6 +158,7 @@ p {
     transform: translate(-59%, -20%);
 }
 
+/*Post Form */
 #make-a-post {
     position: relative;
     left: 50%;
@@ -98,6 +170,32 @@ p {
     width: 25%;
     left: 50%;
     transform: translate(-40%, 90%);
+}
+
+#add-post-form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    transform: translate(-10%, 400%);
+}
+
+
+#post-delete-btn {
+    position: relative;
+    height: 100px;
+    top: 200%;
+    left: 50%;
+    z-index: 20;
+    transform: translate(15%, 32%);
+}
+
+#post {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-70%, 60%);
 }
 
 .choice-form {
@@ -119,13 +217,6 @@ p {
     transform: translate(-260%, -300%);
 }
 
-#add-post-form {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 25%;
-    transform: translate(-10%, 400%);
-}
 
 #game-scores-form {
     position: relative;
@@ -133,22 +224,6 @@ p {
     left: 50%;
     width: 25%;
     transform: translate(-40%, 80%);
-}
-
-
-#post-delete-btn {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(15%, 232%);
-}
-
-#post {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    transform: translate(-70%, 60%);
 }
 
 #add-comment-btn {
@@ -264,4 +339,11 @@ ul {
     top: 30%;
     left: 57%;
     transform: translate(-68%, 200%);
+}
+
+/*Error messages*/
+
+.alert {
+    position: relative;
+    top:10px;
 }
