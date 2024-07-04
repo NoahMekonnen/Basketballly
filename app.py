@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.app_context().push()
 # iagptsui:b0JCJsLrFruyu_EarcfGuxNdH5Bdlf6V@kala.db.elephantsql.com/iagptsui
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql://noah:Godalone1.@localhost:5432/Capstone_one_basketball'))
+    os.environ.get('DATABASE_URL', 'postgresql://iagptsui:b0JCJsLrFruyu_EarcfGuxNdH5Bdlf6V@kala.db.elephantsql.com/iagptsui'))
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "Godalone1."
