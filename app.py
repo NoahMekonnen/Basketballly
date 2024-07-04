@@ -7,7 +7,6 @@ from forms import RegisterForm, LoginForm, GameForm, SelectForm, PlayerForm, Pos
 # from flask_debugtoolbar import DebugToolbarExtension
 from flask_bcrypt import Bcrypt
 import bcrypt
-from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 app.app_context().push()
