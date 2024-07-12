@@ -1,9 +1,8 @@
 const form = $('form')
 if (form[0].id == "raw") {
-    console.log("in raw")
     const inputs = $('input')
     const canvas = document.querySelector('canvas')
-    console.log(form, "FORM")
+   
     form.on('submit', async function (e) {
         e.preventDefault()
         $('.form-Container').remove()
@@ -98,8 +97,6 @@ if (form[0].id == "raw") {
                         }
                     }
                 });
-                console.log(barChart, "barchart")
-                console.log("after bar")
             }
         }
     })
@@ -119,7 +116,6 @@ if (form[0].id == "raw") {
         };
         try {
             const response = await axios.request(options);
-            console.log(response.data.response)
             return response.data.response;
         } catch (error) {
             console.error(error);
@@ -144,7 +140,6 @@ if (form[0].id == "raw") {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data);
             return response.data.response;
         } catch (error) {
             console.error(error);
@@ -166,7 +161,6 @@ if (form[0].id == "raw") {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data);
             return response.data.response
         } catch (error) {
             console.error(error);
@@ -210,5 +204,4 @@ if (form[0].id == "raw") {
     //     } 
     // }); 
 
-    console.log("in palyer stat raw")
 }

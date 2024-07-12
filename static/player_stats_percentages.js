@@ -1,9 +1,9 @@
 const form = $('form')
-console.log("in percent")
+
 if (form[0].id == "percent") {
     const inputs = $('input')
     const canvas = document.querySelector('canvas')
-    console.log(form, "FORM")
+    
     form.on('submit', async function (e) {
         e.preventDefault()
         $('.form-Container').remove()
@@ -16,7 +16,6 @@ if (form[0].id == "percent") {
         for (let team of teams) {
             if (team.name == teamName) {
                 teamId = team.id
-                console.log(team.name)
             }
         }
         const players = await getPlayersRequest(teamId, season)
@@ -109,7 +108,6 @@ if (form[0].id == "percent") {
         };
         try {
             const response = await axios.request(options);
-            console.log(response.data.response)
             return response.data.response;
         } catch (error) {
             console.error(error);
@@ -134,7 +132,6 @@ if (form[0].id == "percent") {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data);
             return response.data.response;
         } catch (error) {
             console.error(error);
@@ -156,7 +153,6 @@ if (form[0].id == "percent") {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data);
             return response.data.response
         } catch (error) {
             console.error(error);

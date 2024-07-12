@@ -91,7 +91,6 @@ function clickedButtonPower(tempButton) {
 
 async function getLikeStatus(username, id){
     const res = await axios.get(`/${username}/basketball-forum/${id}/like/state`)
-    console.log(res.data.clicked)
     return res.data.clicked
 }
 

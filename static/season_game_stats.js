@@ -1,21 +1,18 @@
 const form = $('form')
   const inputs = $('input')
   const canvas = document.querySelector('canvas')
-  console.log(form, "FORM")
+
   form.on('submit', async function (e) {
     e.preventDefault()
     $('.form-Container').remove()
     team = inputs[1].value
     const games = await getGameRequest(team)
-    console.log(games,"games")
+
     for (let game of games) {
-      console.log(game.teams.home.name, inputs[2].value, game.teams.visitors.name, inputs[3].value)
       if (game.teams.home.name == inputs[2].value && game.teams.visitors.name == inputs[3].value) {
-        console.log("innnn")
 
         const xValues = [game.teams.home.name, game.teams.visitors.name]
         const yValues = [game.scores.home.points, game.scores.visitors.points]
-        console.log(yValues,"yvalues")
         const barColors = ["blue", "red"]
 
         const barChart = new Chart(canvas, {
@@ -42,7 +39,6 @@ const form = $('form')
             }
           }
         });
-        console.log(barChart)
       } else if (game.teams.home.name == inputs[3].value && game.teams.visitors.name == inputs[2].value) {
 
         const xValues = [game.teams.home.name, game.teams.visitors.name]
@@ -73,7 +69,6 @@ const form = $('form')
             }
           }
         });
-        console.log(barChart,"barchart")
       }
     }
   })
