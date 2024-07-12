@@ -141,8 +141,10 @@ def show_percent_player_stats():
 
 @app.route('/forum')
 def forum():
-    posts = Post.query.all()
-    return render_template('forum.html',posts=posts)
+    if 'username' in session:
+        posts = Post.query.all()
+        return render_template('forum.html',posts=posts)
+    return redirect('/login')
 
 @app.route('/forum/posts', methods=["GET","POST"])
 def create_post():
