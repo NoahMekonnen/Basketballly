@@ -3,15 +3,23 @@
 {% block title %} Home Page {% endblock %}
 
 {% block content %}
+<div class="forum-Container">
+    <div class="forum-small-Container">
 <h1 id="forum-title">Basketball Forum</h1>
 
-<form action="/{{username}}/basketball-forum/create-post" id="add-post-form">
-    <button class="btn btn-success">Add Post</button>
+<form action="/forum/posts" id="add-post-form">
+    <button class="add-post-button btn btn-success">Add Post</button>
 </form>
 <ul id="post-list">
     {% for post in posts %}
-        <li><a href="/{{username}}/basketball-forum/{{post.id}}">{{post.title}}</a></li>
+        <li class="post-card">
+            <a href="/forum/posts/{{post.id}}">
+                {{post.title}}
+            </a>
+        </li>
     {% endfor %}
 </ul>
+</div>
+</div>
 
 {% endblock %}

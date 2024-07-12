@@ -3,8 +3,8 @@
 {% block title %} Games Scores {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="/static/Game_Scores.css">
-    <h1>Games Scores</h1>
+<div class="form-Container">
+    <h1 class="form-title">Games Scores</h1>
     <a href="/{{username}}/basketball-forum"></a>
     
 <form id="game-scores-form">
@@ -24,8 +24,9 @@
   
     {% endfor %}
   
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="game-scores-button btn btn-primary">Submit</button>
 </form>
+</div>
 <canvas>
 
 </canvas>

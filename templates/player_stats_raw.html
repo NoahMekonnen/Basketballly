@@ -3,9 +3,10 @@
 {% block title %} Player stat scores{% endblock %}
 
 {% block content %}
-    <h1>Player Stats(Raw)</h1>
+<div class="form-Container">
+    <h1 class="form-title">Player Stats(Raw)</h1>
     <a href="/{{username}}/basketball-forum"></a>
-    
+
 <form class="stat-form" id="raw">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
@@ -23,9 +24,10 @@
   
     {% endfor %}
   
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="stats-raw-button btn btn-primary">Submit</button>
 </form>
-<canvas id="canvas">
+</div>
+<canvas>
 
 </canvas>
 <script src="/static/player_stats_raw.js"></script>

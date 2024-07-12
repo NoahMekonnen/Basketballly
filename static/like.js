@@ -17,7 +17,7 @@ function buttonPower(tempButton) {
         likeButtonDiv.prepend(clickedButton)
 
         try{
-        await axios.post(`/${postUsername}/basketball-forum/${hiddenId}/like?clicked=true`)
+        await axios.post(`/forum/${hiddenId}/like?clicked=true`)
         }
 
         catch(e){

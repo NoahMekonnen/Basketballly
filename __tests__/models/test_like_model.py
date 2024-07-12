@@ -1,14 +1,15 @@
-"""User model tests."""
+"""Like model tests."""
 
+# These test should be run locally. Adjust test database url as needed.
 # run these tests like:
 #
-#    python -m unittest test_user_model.py
+#    python -m unittest test_like_model.py
 
 
 import os
 from unittest import TestCase
 
-from models import db, User, LikeButton, Post, Comment
+from models import db, User, Like, Post, Comment
 from flask_bcrypt import Bcrypt
 
 
@@ -32,12 +33,12 @@ from app import app
 db.create_all()
 
 
-class UserModelTestCase(TestCase):
-    """Test views for messages."""
-
+class LikeModelTestCase(TestCase):
     def setUp(self):
         """Create test client, add sample data."""
-
+        self.users = []
+        self.posts = []
+        self.likes = []
         u1 = User(
             username="t1",
             password="HASHED_PASSWORD"
@@ -46,7 +47,13 @@ class UserModelTestCase(TestCase):
         db.session.add(u1)
         db.session.commit()
 
-        self.u1 = u1
+        p1 = Post(
+            username="t1",
+            title="blessed virgin",
+            content="immaculate conception"
+        )
+
+        self.users.append(u1)
 
         u2 = User(
             username="t2",
@@ -54,44 +61,33 @@ class UserModelTestCase(TestCase):
         )
 
         db.session.add(u2)
-        db.session.commit()
-
-        self.u2 = u2
-
-    def test_user_model(self):
-        """Does basic model work?"""
-
-        u = User(
-            username="t",
-            password="HASHED_PASSWORD"
-        )
-
-        db.session.add(u)
-        db.session.commit()
-
-        # User should have no messages & no followers
-        self.assertEqual(len(u.posts), 0)
-
-        db.session.delete(self.u1)
-        db.session.delete(self.u2)
-        db.session.delete(u)
-        db.session.commit()
-
-    def test_posts(self):
-
-        p1=Post(
-            username="t1",
-            title="p1",
-            content="c1"
-        )
         db.session.add(p1)
         db.session.commit()
-        
-        self.assertEqual(len(self.u1.posts), 1)
 
-        db.session.delete(p1)
+        self.users.append(u2)
+        self.posts.append(p1)
+
+    def tearDown(self):
+        for like in self.likes:
+            db.session.delete(like)
+        for post in self.posts:
+            db.session.delete(post)
+        for user in self.users:
+            db.session.delete(user)
+
         db.session.commit()
 
-        db.session.delete(self.u1)
-        db.session.delete(self.u2)
+    def test_like_model(self):
+        """Does basic model work?"""
+
+        self.assertEqual(len(self.posts[0].likes),0)
+
+        l = Like(post_id=self.posts[0].id,username=self.users[1].username)
+
+        db.session.add(l)
         db.session.commit()
+
+        self.likes.append(l)
+
+        self.assertEqual(len(self.posts[0].likes),1)
+      

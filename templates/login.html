@@ -3,17 +3,17 @@
 {% block title %} {% endblock %}
 
 {% block content %}
-<h1 id="login-title">Login</h1>
 
-<div class="login-form-container">
-  <form id="login-form" method="POST">
+<div class="form-Container login-form-Container">
+  <h1 class="form-title">Login</h1>
+  <form method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
     {% for field in form
     if field.widget.input_type != 'hidden' %}
 
     <p>
-      <b>{{ field.label(class="form-label") }}</b>
+      {{ field.label(class="form-label") }}
       {{ field(class="form-control") }}
 
       {% for error in field.errors %}
@@ -23,7 +23,7 @@
 
     {% endfor %}
 
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="login-button btn btn-success">Login</button>
   </form>
 </div>
 {% endblock %}

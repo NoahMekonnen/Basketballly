@@ -1,21 +1,22 @@
 const form = $('form')
-if (form[0].id == "game-scores-form") {
   const inputs = $('input')
   const canvas = document.querySelector('canvas')
   console.log(form, "FORM")
   form.on('submit', async function (e) {
     e.preventDefault()
+    $('.form-Container').remove()
     team = inputs[1].value
     const games = await getGameRequest(team)
-
+    console.log(games,"games")
     for (let game of games) {
       console.log(game.teams.home.name, inputs[2].value, game.teams.visitors.name, inputs[3].value)
       if (game.teams.home.name == inputs[2].value && game.teams.visitors.name == inputs[3].value) {
+        console.log("innnn")
 
         const xValues = [game.teams.home.name, game.teams.visitors.name]
         const yValues = [game.scores.home.points, game.scores.visitors.points]
+        console.log(yValues,"yvalues")
         const barColors = ["blue", "red"]
-        console.log(yValues,"y values")
 
         const barChart = new Chart(canvas, {
           type: "bar",
@@ -41,6 +42,7 @@ if (form[0].id == "game-scores-form") {
             }
           }
         });
+        console.log(barChart)
       } else if (game.teams.home.name == inputs[3].value && game.teams.visitors.name == inputs[2].value) {
 
         const xValues = [game.teams.home.name, game.teams.visitors.name]
@@ -71,9 +73,9 @@ if (form[0].id == "game-scores-form") {
             }
           }
         });
+        console.log(barChart,"barchart")
       }
     }
-    console.log(games)
   })
 
 
@@ -89,7 +91,6 @@ if (form[0].id == "game-scores-form") {
     };
     try {
       const response = await axios.request(options);
-      console.log(response)
       return response.data.response;
     } catch (error) {
       console.error(error);
@@ -109,11 +110,7 @@ if (form[0].id == "game-scores-form") {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   }
-
-  // testRequest()
-}

@@ -1,8 +1,0 @@
-h1{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width:25%;
-    transform: translate(-25%, -400%);
-    color:#1a1722;
-}

@@ -17,11 +17,11 @@
     <header>
         <nav>
             <ul>
-                <li class="logged-in"><a href="/logout">Logout</a></li>
+                <li class="logged-in"><a href="/">Basketballly</a></li>
                 <li class="logged-out"><a href="/login" id="login-link">Login</a></li>
                 <li class="logged-out"><a href="/register">Register</a></li>
                 <li><a href="/users">Users</a></li>
-                <li class="logged-in"><a href="/a/basketball-info">Basketball Info</a></li>
+                <li class="nav-logout logged-in"><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -33,7 +33,6 @@
         {% endblock%}
     </div>
     <link rel="stylesheet" href="/static/app.css">
-    <script src="/static/setNavLinks.js"></script>
 </body>
-
+<script src="/static/setNavLinks.js"></script>
 </html>

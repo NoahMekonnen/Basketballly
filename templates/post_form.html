@@ -3,7 +3,8 @@
 {% block title %} 2023 Games {% endblock %}
 
 {% block content %}
-    <h1 id="make-a-post">Make A Post</h1>
+<div class="form-Container post">
+    <h1 class="form-title">Make A Post</h1>
   
 <form id="post-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
@@ -22,6 +23,7 @@
   
     {% endfor %}
   
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="post-button btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}

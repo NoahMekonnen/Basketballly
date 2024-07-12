@@ -3,9 +3,9 @@
 {% block title %} 2023 Games {% endblock %}
 
 {% block content %}
-
-    <h1 id="comment-title">Make A Comment</h1>
-<form class="template-form" method="POST">
+<div class="form-Container comment-form-Container">
+    <h1 class="form-title">Make A Comment</h1>
+<form class="comment-form" method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
   
     {% for field in form
@@ -22,6 +22,7 @@
   
     {% endfor %}
   
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="make-comment-button btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}

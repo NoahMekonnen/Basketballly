@@ -29,9 +29,9 @@ class Post(db.Model):
 
     content = db.Column(db.Text, nullable = False)
 
-    likes = db.Column(db.Integer, nullable = False, default=0)
+    likes = db.relationship('Like', cascade="all, delete-orphan", backref='post')
 
-    comments = db.relationship('Comment', cascade = "all, delete", passive_deletes=True, backref = 'post')
+    comments = db.relationship('Comment', cascade = "all, delete-orphan", passive_deletes=True, backref = 'post')
 
 
 class Comment(db.Model):
@@ -44,34 +44,15 @@ class Comment(db.Model):
 
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="cascade"), nullable=False)
 
-class Game(db.Model):
+    username = db.Column(db.Text, db.ForeignKey('users.username', ondelete="cascade"), nullable=False)
 
-    __tablename__ = "games"
+class Like(db.Model):
 
-    date = db.Column(db.Text, primary_key=True)
+    __tablename__ = "likes"
 
-    team1 = db.Column(db.Text, primary_key=True)
-
-    team2 = db.Column(db.Text, primary_key=True)
-
-class Player(db.Model):
-
-    __tablename__ = "players"
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    name = db.Column(db.Text, nullable=False)
-
-    free_throw_avg = db.Column(db.Float)
-
-class LikeButton(db.Model):
-
-    __tablename__ = "likebutton"
-
-    like_username = db.Column(db.Text, db.ForeignKey('users.username', ondelete="cascade"), primary_key=True, nullable = False)
-
-    post_username = db.Column(db.Text, db.ForeignKey('users.username', ondelete="cascade"), primary_key=True, nullable = False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="cascade"), primary_key=True, nullable = False)
 
-    clicked = db.Column(db.Boolean, nullable=False, default=False)
+    username = db.Column(db.Text, db.ForeignKey('users.username', ondelete="cascade"), primary_key=True, nullable = False)
+

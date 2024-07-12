@@ -3,13 +3,18 @@
 {% block title %} Users{% endblock %}
 
 {% block content %}
-<h1>{{user.username}}'s Page</h1>
+{% if user.favorite_player %}
 <h3>Favorite Player: {{user.favorite_player}}</h3>
+
+{% endif %}
+{% if user.posts | length %}
 <h3>Posts:</h3>
 <ul>
     {% for post in user.posts %}
-    <li><a href="/{{user.username}}/basketball-forum/{{post.id}}">{{post.title}}</a></li>
+    <li><a href="/forum/posts/{{post.id}}">{{post.title}}</a></li>
     {% endfor %}
 </ul>
-
+{% else %}
+<h3>No Posts...</h3>
+{% endif %}
 {% endblock %}

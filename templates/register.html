@@ -3,17 +3,17 @@
 {% block title %} {% endblock %}
 
 {% block content %}
-<h1 id="register-title">Register</h1>
+<div class="form-Container">
+<h1 class="form-title">Register</h1>
 
-<div class="register-form-container">
-  <form id="register-form" method="POST">
+  <form method="POST">
     {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
     {% for field in form
     if field.widget.input_type != 'hidden' %}
 
     <p>
-      <b>{{ field.label(class="form-label") }}</b>
+      {{ field.label(class="form-label") }}
       {{ field(class="form-control") }}
 
       {% for error in field.errors %}
@@ -23,7 +23,8 @@
 
     {% endfor %}
 
-    <button type="submit" class="btn btn-success">Register</button>
+    <button type="submit" class="register-button btn btn-success">Register</button>
   </form>
 </div>
+<script src="/static/setNavLinks.js"></script>
 {% endblock %}

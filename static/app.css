@@ -8,6 +8,17 @@ body {
     background-image: url(https://www.ncaa.org/images/2023/3/30/MBB-WBB_BallHoop.JPG);
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
+    /* height: 100%; */
+    width: 100%;
+    position: fixed;
+}
+
+.container{
+    position: relative;
+    height: 695px;
+    width: 85%;
+    margin: 0 auto;
 }
 
 /* Navbar styling*/
@@ -37,7 +48,7 @@ li{
     /* margin: 20px; */
 }
 
-li a {
+nav a {
     color: white;
     display: block;
     /* margin: 0px; */
@@ -53,6 +64,15 @@ li:hover {
     /* color:#E64833 */
     background-color: #0097e6;
 }
+
+.nav-logout{
+    position: absolute;
+    right: 60px;
+    top: 0px;
+    z-index: 10;
+    height: 70px;
+}
+
 /*Home Page- Not logged in*/
 
 .Home-Content{
@@ -86,120 +106,147 @@ li:hover {
     height: 40px;
 }
 
-.template-form {
-    position: absolute;
-    left: 50%;
-    width: 25%;
-    transform: translate(-40%, 250%);
-}
-
-.stat-form{
-    position: absolute;
-    left: 50%;
-    width: 25%;
-    transform: translate(-40%, 0%);
-}
-
 /*Register/Login Form */
 
-#register-title{
-    color: #40739e;
-    margin: 0 auto;
-    width: 160px;
+.login-form-Container{
+    height: 260px !important;
 }
 
-.register-form-container{
-    margin: 0 auto;
-    transform: translate(0%, 20%);
-    background-color: #40739e;
-    width: 400px;
-    height: 360px;
-    border-radius: 4px;
+.login-button{
+    width: 100%;
+    margin-top: 4%;
 }
 
-#register-form{
-    position: relative;
-    width: 90%;
-    margin: 0 auto;
-    top: 8%;
-}
-
-#login-title{
-    color: #40739e;
-    margin: 0 auto;
-    width: 120px;
-}
-
-.login-form-container{
-    margin: 0 auto;
-    transform: translate(0%, 20%);
-    background-color: #40739e;
-    width: 400px;
-    height: 260px;
-    border-radius: 4px;
-}
-
-#login-form{
-    position: relative;
-    width: 90%;
-    margin: 0 auto;
-    top: 8%;
+.register-button{
+    width: 100%;
+    margin-top: 5%;
 }
 
 .form-label{
-    color: #44bd32;
+    color: #0097e6;
+    margin-bottom: 10px;
 }
 
+/* Comments */
 #comment-title {
-    color: #1B1464;
+    color: #40739e;
     position: absolute;
-    top: 30%;
-    left: 54%;
-    transform: translate(-59%, -20%);
+}
+
+.comment-form-Container{
+    height: 180px !important;
+}
+
+.make-comment-button{
+    width: 100%;
+    margin-top: 6%;
+}
+
+/* Edit comment form */
+
+.edit-comment-form{
+    height: 180px !important;
+}
+
+.edit-comment-button{
+    width: 100%;
+    margin-top: 6%;
 }
 
 /*Post Form */
-#make-a-post {
-    position: relative;
-    left: 50%;
-    transform: translate(-5%, 230%);
+
+div .post {
+    height: 280px;
 }
 
-#post-form {
-    position: relative;
-    width: 25%;
-    left: 50%;
-    transform: translate(-40%, 90%);
+#forum-title {
+    margin: 0 auto;
+    width: 350px;
+    margin-bottom: 20px;
 }
 
-#add-post-form {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 25%;
-    transform: translate(-10%, 400%);
+.post-button{
+    width: 100%;
+    margin-top: 10%;
 }
 
-
-#post-delete-btn {
-    position: relative;
-    height: 100px;
-    top: 200%;
-    left: 50%;
-    z-index: 20;
-    transform: translate(15%, 32%);
+#post-list a{
+    text-decoration: none;
+    width: 100%;
+    font-size: 1.5em;
 }
 
-#post {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    transform: translate(-70%, 60%);
+.forum-Container{
+    background-color: white;
+    height: 100%;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.forum-small-Container{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.post-form{
+    width: 100%;
+}
+
+svg{
+    width: 30px;
+    height: 30px;
+}
+
+/* Forum */
+
+.post-div{
+    background-color: #c23616;
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 0px 0px 6px 6px;
+}
+
+.add-post-button{
+    display: block;
+    width: 140px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.forum-link {
+    color: white;
+    text-decoration: none;  
+}
+
+.forum-link:hover{
+    color: #00a8ff;
 }
 
 .choice-form {
     position: relative;
+    width: 100%;
+    top: 11%;
+}
+
+/* Home page */
+.new-home-small-Container{
+    background-color: #c23616;
+    width: 400px;
+    height: 280px;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 0 auto;
+    position: relative;
+    top: 200px;
+}
+
+.new-home-Container{
+    width: 100%;
+}
+
+.new-home-button{
+    margin-top: 20%;
     width: 100%;
 }
 
@@ -210,140 +257,70 @@ li:hover {
     transform: translate(-210%, -300%);
 }
 
-#game-score-logout-form {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-260%, -300%);
+.form-title{
+    position: fixed;
+    top: 200px;
+    color: #40739e;
 }
 
+/* Game Scores */
 
-#game-scores-form {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 25%;
-    transform: translate(-40%, 80%);
-}
-
-#add-comment-btn {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    transform: translate(-60%, -170%);
-}
-
-.numOfLikes {
-    font-size: 25px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(55%, -163%);
-}
-
-#likes-title {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(20%, -70%);
-}
-
-.likeButton {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-5%, 10%);
-}
-
-#comments-title {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    transform: translate(-80%, -200%);
-}
-
-.comment-div {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-30%, 34%);
-    height: 250px;
-    width: 350px;
-    overflow-y: auto;
-}
-
-#comment-list {
-    position: relative;
+.form-Container{
+    background-color: #c23616;
+    margin: 0 auto;
     width: 400px;
-    height: 50px;
-    transform: translate(35%, 30%);
-}
-
-#comment-content{
-    width:500px;
-}
-
-.comment-delete-btn {
+    height: 350px;
+    border-radius: 6px;
+    padding: 15px;
     position: relative;
-    transform: translate(15%, -100%);
+    top: 200px;
 }
 
-.register-title {
-    color: #1B1464;
-    position: relative;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -20%);
+.game-scores-button{
+    width: 100%;
+    margin-top: 5%;
 }
 
-#forum-title {
-    color: #1B1464;
-    position: relative;
-    top: 30%;
-    left: 57%;
-    transform: translate(-15%, 200%);
+/* Player stats raw */
+
+.stats-raw-Container{
+    margin: 0 auto;
+    width: 400px;
 }
 
-.forum-link {
-    color: white;
-    position: absolute;
-    left: 40%;
-    transform: translate(0%, 1025%);
+.stats-raw-button{
+    width: 100%;
+    margin-top: 5%;
 }
 
-#post-list {
-    position: relative;
-    top: 30%;
-    left: 57%;
-    transform: translate(-12%, 640%);
+/* users */
+
+.user-list-Container{
+    background-color: #c23616;
+    padding: 15px;
+    width: 85%;
+    margin: 0 auto;
+    border-radius: 0px 0px 6px 6px;
+    height: 100%;
 }
 
-#post-content {
-    color: #4e0b0d;
+.user-list-Container a {
+    text-decoration: none;
+    font-size: 1.5em;
 }
 
-
-#post-title {
-    color: #6F1E51;
-}
-
-ul {
-    list-style-type: none;
-    height: 23px;
-}
-
-.msg {
-    position: relative;
-    top: 30%;
-    left: 57%;
-    transform: translate(-68%, 200%);
+@media(min-height: 100.01vh){
+   .user-list-Container{
+    overflow-y: scroll;
+   } 
 }
 
 /*Error messages*/
 
 .alert {
-    position: relative;
-    top:10px;
+    position: absolute;
+    /* position: relative;
+    top: 10px; */
+    top:40px;
+    width: 100%;
 }

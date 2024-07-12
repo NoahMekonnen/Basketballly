@@ -3,7 +3,8 @@
 {% block title %} Player stat percentages{% endblock %}
 
 {% block content %}
-    <h1>Player Stats(Percent/Ratio)</h1>
+<div class="form-Container">
+    <h1 class="form-title">Player Stats(Percent/Ratio)</h1>
     <a href="/{{username}}/basketball-forum"></a>
   
 <form class="stat-form" id= "percent">
@@ -25,10 +26,10 @@
   
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
+<canvas>
 
-  <canvas id="canvas">
-
-  </canvas>
+</canvas>
 
 <script src="/static/player_stats_percentages.js"></script>
 {% endblock %}

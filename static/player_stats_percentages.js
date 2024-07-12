@@ -6,6 +6,7 @@ if (form[0].id == "percent") {
     console.log(form, "FORM")
     form.on('submit', async function (e) {
         e.preventDefault()
+        $('.form-Container').remove()
         const name = inputs[1].value
         const teamName = inputs[2].value
         const season = inputs[3].value

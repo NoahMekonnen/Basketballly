@@ -3,37 +3,41 @@
 {% block title %} Home Page {% endblock %}
 
 {% block content %}
-<div id="post">
+<div class="post-div">
     <h1 id="post-title">{{post.title}}</h1>
     <p id="post-content">{{post.content}}</p>
-    <form action="/{{post.username}}/basketball-forum/{{post.id}}/delete-post" id="post-delete-btn" method="POST">
-        <button class="btn btn-danger">Delete</button>
-    </form>
-    <!-- <div class="likeButton"></div>
-    <h4 id="likes-title">Likes:</h4>
-    <p class="numOfLikes">{{post.likes}}</p> -->
-    <form action="/{{username}}/basketball-forum/{{post.id}}/create-comment" id="add-comment-btn">
-        <button class="btn btn-success">Add Comment</button>
-    </form>
-</div>
-
-
-
-<div class="comment-div">
-    <h3 id="comments-title">Comments:</h3>
-    <ul id="comment-list">
-        {% for comment in post.comments %}
-        <p id="comment-content">{{comment.content}}</p>
-        <form action="/{{username}}/basketball-forum/{{comment.post_id}}/{{comment.id}}/edit-comment">
-            <button class="btn btn-primary">Edit</button>
-        </form>
-        <form action="/{{username}}/basketball-forum/{{comment.post_id}}/{{comment.id}}/delete-comment"
-            class="comment-delete-btn" method="POST">
+    <div class="post-button-Container">
+        {% if is_owner %}
+        <form action="/forum/posts/{{post.id}}/delete" id="post-delete-btn" method="POST">
             <button class="btn btn-danger">Delete</button>
         </form>
-        {% endfor %}
-    </ul>
+        {% endif %}
+        
+        <form action="/forum/posts/{{post.id}}/comments" id="add-comment-btn">
+            <button class="btn btn-success">Add Comment</button>
+        </form>
+    </div>
+    {% if post.comments | length %}
+    <div class="comment-div">
+        <h3 id="comments-title">Comments:</h3>
+        <ul id="comment-list">
+            {% for comment in post.comments %}
+            <p id="comment-content">{{comment.content}}</p>
+            {% if comment.username == session_username %}
+            <form action="/forum/posts/{{post.id}}/comments/{{comment.id}}/edit">
+                <button class="btn btn-primary">Edit</button>
+            </form>
+            <form action="/forum/posts/{{post.id}}/comments/{{comment.id}}/delete"
+                class="comment-delete-btn" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 </div>
+
 
 <div class="hidden-post-id">{{post.id}}</div>
 <div class="hidden-post-username">{{post.username}}</div>

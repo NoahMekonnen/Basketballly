@@ -4,28 +4,32 @@
 
 {% block content %}
 
-<a href="/{{username}}/basketball-forum" class="forum-link">Forum</a>
+<div class="new-home-Container">
+  <div class="new-home-small-Container">
+    <a href="/forum" class="forum-link">Baller Chatroom</a>
 
-<div class="choice-form">
-  <form class="template-form" method="POST">
-    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
-  
-    {% for field in form
-           if field.widget.input_type != 'hidden' %}
-  
-      <p>
-        {{ field.label(class="form-label") }}
-        {{ field(class="form-control") }}
-  
-        {% for error in field.errors %}
+    <div class="choice-form">
+      <form class="home-forum-form" method="POST">
+        {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <p>
+          {{ field.label(class="form-label") }}
+          {{ field(class="form-control") }}
+
+          {% for error in field.errors %}
           {{ error }}
+          {% endfor %}
+        </p>
+
         {% endfor %}
-      </p>
-  
-    {% endfor %}
-  
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+        <button type="submit" class="new-home-button btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
