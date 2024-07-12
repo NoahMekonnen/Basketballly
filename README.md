@@ -26,5 +26,6 @@ https://capstone-1-82gh.onrender.com/
 ### Tech Stack
 
 * Flask
+* HTML
 * Javascript
 * CSS
