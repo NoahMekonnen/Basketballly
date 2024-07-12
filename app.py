@@ -73,6 +73,8 @@ def register():
             db.session.commit()
         
             session['username'] = user.username
+            print(session['username'])
+            print(session)
             return redirect("/basketball-info")
         else:
             flash("That username is already taken", "danger")
