@@ -1,4 +1,3 @@
-const loginForm = $('#login-form')
 const nav = $('nav')
 
 async function setNavLinks() {
