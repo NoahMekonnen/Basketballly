@@ -6,6 +6,9 @@ This is a site which allows people to investigate important basketball stats and
 
 https://capstone-1-82gh.onrender.com/
 
+### Database Schema
+[Database Schema](https://github.com/NoahMekonnen/Basketballly/blob/main/DatabaseDiagram.png?raw=true)
+
 ### App features include:
 
 * A user can view other users in the database
