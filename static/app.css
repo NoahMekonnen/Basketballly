@@ -324,3 +324,18 @@ svg{
     top:40px;
     width: 100%;
 }
+
+.likeContainer{
+    position: absolute;
+    left: 400px;
+}
+
+.likeButton{
+    width: 80px;
+    border-radius: 6px;
+    background-color: hsl(228, 8%, 87%);
+}
+
+.likeButton:hover{
+    background-color: hsl(228, 8%, 74%);
+}

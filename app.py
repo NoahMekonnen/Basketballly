@@ -174,10 +174,8 @@ def post_detail(post_id):
     
     if 'username' in session:
         post = Post.query.get(post_id)
-        session_user = User.query.get(session['username'])
-        post_user = User.query.get(post.username)
-        is_owner = session_user == post_user
-        return render_template('post_detail.html',post=post,is_owner=is_owner,session_username=session['username'],likes=post.likes)
+        likes = Like.query.filter((Like.username==session['username']) & (Like.post_id==post_id)).all()
+        return render_template('post_detail.html',post=post,my_likes=likes)
     else:
         flash("You must be logged in","danger")
         return redirect('/login')
@@ -279,23 +277,24 @@ def delete_comment(post_id,comment_id):
 
 ################################################################ Like Routes
 
-# In progress maybe
-# @app.route('/forum/posts/<int:post_id>/like', methods=["POST"])
-# def like_post(post_id):
-#     """Like or unlike a post"""
-#     if 'username' in session:
-#         post = Post.query.filter_by(post_id=post_id).first()
-#         like = Like.query.filter((Like.post_id == post_id) & (Like.username == session['username'])).first()
-#         if not (post.username == session['username']) and not like:
-#             new_like = Like(post_id=post_id, username=session['username'])
+@app.route('/forum/posts/<int:post_id>/like', methods=["POST"])
+def like_post(post_id):
+    """Like or unlike a post"""
+    if 'username' in session:
+        post = Post.query.filter_by(id=post_id).first()
+        like = Like.query.filter((Like.post_id == post_id) & (Like.username == session['username'])).first()
+        if not like:
+            new_like = Like(post_id=post_id, username=session['username'])
 
-#             db.session.add(new_like)
-#             db.session.commit()
-#         elif like:
-#             db.session.delete(like)
-#             db.session.commit()
+            db.session.add(new_like)
+            db.session.commit()
+            return jsonify({'msg': "Like Added"})
+        elif like:
+            db.session.delete(like)
+            db.session.commit()
+            return jsonify({'msg': "Like Deleted"})
 
-#     return jsonify({msg: "Unauthorized"})
+    return jsonify({msg: "Unauthorized"})
     
 @app.route('/login-state')
 def change_login_status():
